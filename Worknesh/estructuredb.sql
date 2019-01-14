@@ -79,3 +79,9 @@ CREATE TABLE tVacaciones(
     id_asistencia INTEGER,
     FOREIGN KEY(id_asistencia) REFERENCES tAsistencia(id)
 );
+
+CREATE TABLE tUser(
+    id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    user TEXT NOT NULL,
+    pswd TEXT NOT NULL
+);
