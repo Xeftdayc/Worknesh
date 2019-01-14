@@ -136,6 +136,10 @@ class modRegistro(tk.Frame):
         lbArea.grid(row=1, sticky="e",column=1)
         lbDetalle = tk.Label(Form, text = "Detalle:", font=('arial', 14), bd=15)
         lbDetalle.grid(row=2, sticky="e",column=1)
+        lbLugar = tk.Label(Form, text = "Lugar:", font=('arial', 14), bd=15)
+        lbLugar.grid(row=1, sticky="e",column=3)
+        lbTipo = tk.Label(Form, text = "Tipo:", font=('arial', 14), bd=15)
+        lbTipo.grid(row=2, sticky="e",column=3)
 
         # Entrys - Cajas de Texto
         tbBuscar = tk.Entry(Form, font=(14))
@@ -146,8 +150,12 @@ class modRegistro(tk.Frame):
         tbArea.grid(row=1, column=2)
         tbDetalle = tk.Entry(Form, textvariable=tbDetalle, font=(14))
         tbDetalle.grid(row=2, column=2)
+        tbLugar = tk.Entry(Form, font=(14))
+        tbLugar.grid(row=1, column=4)
+        tbTipo = tk.Entry(Form, font=(14))
+        tbTipo.grid(row=2, column=4)
 
-        btnInsert = tk.Button(self, text="Add Libraian", command=lambda: dbquery.insert(tbArea.get(), tbDetalle.get()))
+        btnInsert = tk.Button(self, text="Agregar Registro", command=lambda: dbquery.insert(tbArea.get(), tbDetalle.get()))
         btnInsert.pack()
         btnBack = tk.Button(self, text='BACK',
                                 command=lambda: controller.show_frame(Dashboard)) 
@@ -156,7 +164,7 @@ class modRegistro(tk.Frame):
 class modVacaciones(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
-
+        10
         # Variables
         tbArea = tk.StringVar()
         tbDetalle = tk.StringVar()
