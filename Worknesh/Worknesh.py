@@ -8,7 +8,7 @@ from tkinter import *
 # Estructure Page in Page
 class appWork(tk.Tk):
     def __init__(self, *args, **kwargs):
-        tk.Tk.__init__(self, *args, **kwargs)
+        tk.Tk.__init__(s lf, *args, **kwargs)
 
         container = tk.Frame(self)
         container.pack(side="top", fill="both", expand = False)
