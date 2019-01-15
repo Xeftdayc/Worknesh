@@ -33,23 +33,71 @@ def insert(area, detalle):
     iConn.commit()
     iConn.close()
     showinfo( title = "Nuevos Datos", message = "El nuevo dato fue ingresado correctamente")
-    view()
+    #view()
 
-# Define Row in Grid
-def view():
+def addDatos(dni, nombre, apellido, sexo, direccion, f_nacimiento, email, nromovil):
     Database()
-    iCur.execute("SELECT * FROM tArea")
-    row=iCur.fetchall()
+    iCur.execute('INSERT INTO tDatos VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?);',(dni, nombre, apellido, sexo, direccion, f_nacimiento, email, nromovil))
+    print("Entry Added")
+    iConn.commit()
     iConn.close()
-    return row
+    showinfo( title = "Nuevos Datos", message = "El nuevo dato fue ingresado correctamente")
+    #view()
 
-# Define Search
+def addVacaciones(tipo, periodo, c_asistencia, c_vacaciones, detalle):
+    Database()
+    iCur.execute('INSERT INTO tVacaciones VALUES (NULL, ?, ?, ?, ?, ?);',(tipo, periodo, c_asistencia, c_vacaciones, detalle))
+    print("Entry Added")
+    iConn.commit()
+    iConn.close()
+    showinfo( title = "Nuevos Datos", message = "El nuevo dato fue ingresado correctamente")
+    #view()
+
+def addAsistencia(f_actual, checkin, i_detalle, checkout, o_detalle):
+    Database()
+    iCur.execute('INSERT INTO tAsistencia VALUES (NULL, ?, ?, ?, ?, ?);',(f_actual, checkin, i_detalle, checkout, o_detalle))
+    print("Entry Added")
+    iConn.commit()
+    iConn.close()
+    showinfo( title = "Nuevos Datos", message = "El nuevo dato de Asistencia fue agregado")
+
+def addPapeletas(tipo, fecha, h_salida, h_retorno, motivo, lugar, autoriza):
+    Database()
+    iCur.execute('INSERT INTO tPapeletas VALUES (NULL, ?, ?, ?, ?, ?, ?, ?);',(tipo, fecha, h_salida, h_retorno, motivo, lugar, autoriza))
+    print("Entry Added")
+    iConn.commit()
+    iConn.close()
+    showinfo( title = "Nuevos Datos", message = "Los datos se ingresaron correctamente")
+
+# Define Search in DB
 def search(area="", detalle=""):
     Database()
     iCur.execute("SELECT * FROM tArea where area=? OR detalle=?",(area,detalle))
     row=iCur.fetchall()
     iConn.close()
     return row
+
+def queryAsistencia(f_actual, checkin, i_detalle, checkout, o_detalle):
+    Database()
+    iCur.execute("SELECT * FROM tAsistencia WHERE f_actual=?, checkin=?, i_detalle=?, checkout=?, o_detalle=?",(f_actual, checkin, i_detalle, checkout, o_detalle))
+    row=iCur.fetchall()
+    iConn.close()
+    return now
+
+# Define Update in DB
+def update(id,area,detalle):
+    #from dbquery import calculation
+    Database()
+    iCur.execute("UPDATE tArea SET area=?, detalle=?",(area,detalle))
+    iConn.commit()
+    iConn.close()
+
+def upAsistencia():
+    #from dbquery import calculation
+    Database()
+    iCur.execute("UPDATE tAsistencia SET f_actual=?, checkin=?, i_detalle=?, checkout=?, o_detalle=?", (f_actual, checkin, i_detalle, checkout, o_detalle))
+    iConn.commit()
+    iConn.close()
 
 # Define Delete in DB
 def delete(id):
@@ -58,11 +106,9 @@ def delete(id):
     iConn.commit()
     iConn.close()
 
-# Define Update in DB
-def update(id,area,detalle):
-    from backend import calculation
+def delAsistencia(id):
     Database()
-    iCur.execute("UPDATE tArea SET area=?, detalle=?",(area,detalle))
+    iCur.execute("DELETE FROM tAsistencia where id=?", (id))
     iConn.commit()
     iConn.close()
 
