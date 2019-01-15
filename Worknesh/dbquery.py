@@ -54,22 +54,6 @@ def addVacaciones(tipo, periodo, c_asistencia, c_vacaciones, detalle):
     showinfo( title = "Nuevos Datos", message = "El nuevo dato fue ingresado correctamente")
     #view()
 
-def delVacaciones(id):
-    Database()
-    iCur.execute("DELETE FROM tVacaciones where id=?",(id))
-    iConn.commit()
-    iConn.close()
-
-# Define Update in DB
-def upVacaciones(tipo,periodo, c_asistencia, c_vacaciones, detalle):
-    from dbquery import calculation
-    Database()
-    iCur.execute("UPDATE tTipo SET tipo=?, periodo=?, c_asistencia=?,c_vacaciones=?, detalle",(tipo,periodo,c_asistencia, c_vacaciones, detalle))
-    iConn.commit()
-    iConn.close()
-
-
-
 # Define Search
 def search(area="", detalle=""):
     Database()
@@ -85,11 +69,24 @@ def delete(id):
     iConn.commit()
     iConn.close()
 
+def delAsistencia(id):
+    Database()
+    iCur.execute("DELETE FROM tAsistencia where id=?", (id))
+    iConn.commit()
+    iConn.close()
+
 # Define Update in DB
 def update(id,area,detalle):
-    from dbquery import calculation
+    #from dbquery import calculation
     Database()
     iCur.execute("UPDATE tArea SET area=?, detalle=?",(area,detalle))
+    iConn.commit()
+    iConn.close()
+
+def upAsistencia():
+    #from dbquery import calculation
+    Database()
+    iCur.execute("UPDATE tAsistencia SET f_actual=?, checkin=?, i_detalle=?, checkout=?, o_detalle=?", (f_actual, checkin, i_detalle, checkout, o_detalle))
     iConn.commit()
     iConn.close()
 
