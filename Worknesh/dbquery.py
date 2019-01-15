@@ -33,15 +33,16 @@ def insert(area, detalle):
     iConn.commit()
     iConn.close()
     showinfo( title = "Nuevos Datos", message = "El nuevo dato fue ingresado correctamente")
-    view()
+    #view()
 
-# Define Row in Grid
-def view():
+def addVacaciones(tipo, periodo, c_asistencia, c_vacaciones, detalle):
     Database()
-    iCur.execute("SELECT * FROM tArea")
-    row=iCur.fetchall()
+    iCur.execute('INSERT INTO tVacaciones VALUES (NULL, ?, ?, ?, ?, ?);',(tipo, periodo, c_asistencia, c_vacaciones, detalle))
+    print("Entry Added")
+    iConn.commit()
     iConn.close()
-    return row
+    showinfo( title = "Nuevos Datos", message = "El nuevo dato fue ingresado correctamente")
+    #view()
 
 # Define Search
 def search(area="", detalle=""):
@@ -60,7 +61,7 @@ def delete(id):
 
 # Define Update in DB
 def update(id,area,detalle):
-    from backend import calculation
+    from dbquery import calculation
     Database()
     iCur.execute("UPDATE tArea SET area=?, detalle=?",(area,detalle))
     iConn.commit()
