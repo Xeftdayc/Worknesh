@@ -68,11 +68,24 @@ def delete(id):
     iConn.commit()
     iConn.close()
 
+def delAsistencia(id):
+    Database()
+    iCur.execute("DELETE FROM tAsistencia where id=?", (id))
+    iConn.commit()
+    iConn.close()
+
 # Define Update in DB
 def update(id,area,detalle):
-    from dbquery import calculation
+    #from dbquery import calculation
     Database()
     iCur.execute("UPDATE tArea SET area=?, detalle=?",(area,detalle))
+    iConn.commit()
+    iConn.close()
+
+def upAsistencia():
+    #from dbquery import calculation
+    Database()
+    iCur.execute("UPDATE tAsistencia SET f_actual=?, checkin=?, i_detalle=?, checkout=?, o_detalle=?", (f_actual, checkin, i_detalle, checkout, o_detalle))
     iConn.commit()
     iConn.close()
 
