@@ -51,6 +51,7 @@ def addAsistencia(f_actual, checkin, i_detalle, checkout, o_detalle):
     iConn.commit()
     iConn.close()
     showinfo( title = "Nuevos Datos", message = "El nuevo dato de Asistencia fue agregado")
+    #view()
 
 # Define Search
 def search(area="", detalle=""):

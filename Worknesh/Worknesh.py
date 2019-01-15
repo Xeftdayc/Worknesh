@@ -273,7 +273,7 @@ class modAsistencia(tk.Frame):
         lbNombre.grid(row=3, sticky="e",column=0)
         lbApellido = tk.Label(Form, text = "Apellido:", font=('arial', 14), bd=15)
         lbApellido.grid(row=3, sticky="e",column=1)
-        lbFactual = tk.Label(Form, text = "Factual:", font=('arial', 14), bd=15)
+        lbFactual = tk.Label(Form, text = "Fecha actual:", font=('arial', 14), bd=15)
         lbFactual.grid(row=3, sticky="e",column=2)
         lbCheckin = tk.Label(Form, text = "Checkin:", font=('arial', 14), bd=15)
         lbCheckin.grid(row=5, column=0, sticky="e")
@@ -317,8 +317,8 @@ class modAsistencia(tk.Frame):
         chViernes = tk.Checkbutton(Form, text="Viernes", variable=vViernes).grid(row=13)
 
 
-        btnAdd = tk.Button(self, text="Agregar Registro", command=lambda: dbquery.addAsistencia(tbFactual.get(), tbCheckin.get(), tbIndetalle.get(), tbCheckout.get(), tbOutdetalle.get()))
-        btnAdd.pack()
+        btnInsert = tk.Button(self, text="Agregar Registro", command=lambda: dbquery.addAsistencia(tbFactual.get(), tbCheckin.get(), tbIndetalle.get(), tbCheckout.get(), tbOutdetalle.get()))
+        btnInsert.pack()
         btnBack = tk.Button(self, text='BACK',
                                 command=lambda: controller.show_frame(Dashboard)) 
         btnBack.pack()
