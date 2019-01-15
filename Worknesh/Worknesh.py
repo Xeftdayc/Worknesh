@@ -18,7 +18,7 @@ class appWork(tk.Tk):
 
         self.frames = {}
 
-        for F in (Login, Dashboard, modRegistro, modVacaciones, Viewlib):
+        for F in (Login, Dashboard, modTester, modRegistro, modVacaciones, Viewlib):
             frame = F(container, self)
 
             self.frames[F] = frame
