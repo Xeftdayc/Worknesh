@@ -70,6 +70,14 @@ def addPapeletas(tipo, fecha, h_salida, h_retorno, motivo, lugar, autoriza):
     iConn.close()
     showinfo( title = "Modelo para Insertar Papeletas", message = "Los datos se ingresaron correctamente")
 
+def addPermisos(tipo, fecha_in, fecha_out, c_dias, motivo, autoriza):
+    Database()
+    iCur.execute('INSERT INTO tPermisos VALUES (NULL, ?, ?, ?, ?, ?, ?);',(tipo, fecha_in, fecha_out, c_dias, motivo, autoriza))
+    print("Entry Added")
+    iConn.commit()
+    iConn.close()
+    showinfo( title = "Modelo para Insertar Permisos", message = "Los datos se ingresaron correctamente")
+
 # Define Search in DB
 def search(area="", detalle=""):
     Database()
@@ -83,7 +91,17 @@ def queryAsistencia(f_actual, checkin, i_detalle, checkout, o_detalle):
     iCur.execute("SELECT * FROM tAsistencia WHERE f_actual=?, checkin=?, i_detalle=?, checkout=?, o_detalle=?",(f_actual, checkin, i_detalle, checkout, o_detalle))
     row=iCur.fetchall()
     iConn.close()
-    return now
+    return row
+
+def queryDatos(id, dni, nombre):
+    Database()
+    iCur.execute("SELECT * FROM tDatos")
+    varDatos = iCur.fetchall()
+    for Datos in varDatos:
+        print("ID:", id[0], "DNI:", dni[1], "Nombre:", nombre[2])
+
+    iConn.commit()
+    iConn.close()
 
 # Define Update in DB
 def update(id,area,detalle):
