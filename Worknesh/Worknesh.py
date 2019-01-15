@@ -215,7 +215,7 @@ class modVacaciones(tk.Frame):
         tbDetalle.grid(row=3, column=4)
 
 
-        btnInsert = tk.Button(self, text="Add Libraian", command=lambda: dbquery.insert(tbArea.get(), tbDetalle.get()))
+        btnInsert = tk.Button(self, text="Add Libraian", command=lambda: dbquery.addVaciones(tbTipo.get(), tbPeriodo.get(), tbAsistencia.get(), tbVacaciones.get(),tbDetalle.get()))
         btnInsert.pack()
         btnBack = tk.Button(self, text='BACK',
                                 command=lambda: controller.show_frame(Dashboard)) 
