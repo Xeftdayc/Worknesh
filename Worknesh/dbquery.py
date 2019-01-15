@@ -35,10 +35,10 @@ def insert(area, detalle):
     showinfo( title = "Nuevos Datos", message = "El nuevo dato fue ingresado correctamente")
     #view()
 
-def addVaciones(tipo, periodo, c_asistencia, c_vacaciones, detalle, id_asistencia):
+def addVacaciones(tipo, periodo, c_asistencia, c_vacaciones, detalle):
     Database()
-    iCur.execute('INSERT INTO tVacaciones VALUES (NULL, ?, ?, ?, ?, ?, 1);',(tipo, periodo, c_asistencia, c_vacaciones, detalle, id_asistencia))
-    print("Entry")
+    iCur.execute('INSERT INTO tVacaciones VALUES (NULL, ?, ?, ?, ?, ?);',(tipo, periodo, c_asistencia, c_vacaciones, detalle))
+    print("Entry Added")
     iConn.commit()
     iConn.close()
     showinfo( title = "Nuevos Datos", message = "El nuevo dato fue ingresado correctamente")

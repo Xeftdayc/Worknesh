@@ -328,8 +328,9 @@ class modAsistencia(tk.Frame):
 class modVacaciones(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
+        
         # Variables
-        tbTitle = tk.StringVar()
+        
         tbBuscar = tk.StringVar()
         tbCodigo = tk.StringVar()
         tbTipo = tk.StringVar()
@@ -379,7 +380,7 @@ class modVacaciones(tk.Frame):
         tbDetalle.grid(row=3, column=4)
 
 
-        btnInsert = tk.Button(self, text="Add Libraian", command=lambda: dbquery.addVaciones(tbTipo.get(), tbPeriodo.get(), tbAsistencia.get(), tbVacaciones.get(),tbDetalle.get()))
+        btnInsert = tk.Button(self, text="Add Libraian", command=lambda: dbquery.addVacaciones(tbTipo.get(), tbPeriodo.get(), tbAsistencia.get(), tbVacaciones.get(),tbDetalle.get()))
         btnInsert.pack()
         btnBack = tk.Button(self, text='BACK',
                                 command=lambda: controller.show_frame(Dashboard)) 
