@@ -8,21 +8,18 @@ import dbquery
 # Estructure Page in Page
 class appWork(tk.Tk):
     def __init__(self, *args, **kwargs):
-        tk.Tk.__init__(s lf, *args, **kwargs)
+        tk.Tk.__init__(self, *args, **kwargs)
 
         container = tk.Frame(self)
         container.pack(side="top", fill="both", expand = False)
-
         container.grid_rowconfigure(0, weight=1)
         container.grid_columnconfigure(0, weight=1)
 
         self.frames = {}
-
         for F in (Login, Dashboard, modTester, modRegistro, modAsistencia, modVacaciones, modPapeletas, Viewlib):
             frame = F(container, self)
             self.frames[F] = frame
             frame.grid(row=0, column=0, sticky="nsew")
-
         self.show_frame(Login)
 
     def show_frame(self, cont):
@@ -82,11 +79,10 @@ class Dashboard(tk.Frame):
         self.Area.focus()
         self.Area.grid(row = 1, column = 1)
 
-        btnTest = tk.Button(self, text="Modulo de Registro", font=('calibri', 18), bd=10, pady=5,
+        btnTest = tk.Button(self, text="Modulo de Tester", font=('calibri', 18), bd=10, pady=5,
                             command=lambda: controller.show_frame(modTester))
         btnTest.pack(fill="both")
-
-        btnRegistro = tk.Button(self, text="Modulo de Datos", font=('calibri', 18), bd=10, pady=5,
+        btnRegistro = tk.Button(self, text="Modulo de Registro", font=('calibri', 18), bd=10, pady=5,
                             command=lambda: controller.show_frame(modRegistro))
         btnRegistro.pack(fill="both")
         btnAsistencia = tk.Button(self, text="Modulo de Asistencia", font=('calibri', 18), bd=10, pady=5,
@@ -98,15 +94,12 @@ class Dashboard(tk.Frame):
         btnPapeletas = tk.Button(self, text="Modulo de Papeletas", font=('calibri', 18), bd=10, pady=5,
                             command=lambda: controller.show_frame(modPapeletas))
         btnPapeletas.pack(fill="both")
-
         btnView = tk.Button(self, text="Modulo de Vista de Elementos", font=('calibri', 18), bd=10, pady=5,
                             command=lambda: controller.show_frame(Viewlib))
         btnView.pack(fill="both")
-
         btnDel = tk.Button(self, text="Delete Librarian", font=('calibri', 18), bd=10, pady=5,
                             command=lambda: controller.show_frame(Dashboard))
         btnDel.pack(fill="both")
-
         btnLogout = tk.Button(self, text="Logout", font=('calibri', 14), bd=5, pady=5,
                             command=lambda: controller.show_frame(Dashboard))
         btnLogout.pack()

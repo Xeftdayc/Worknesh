@@ -1,4 +1,5 @@
 from tkinter.messagebox import showinfo
+
 import sqlite3
 
 # Variable Global de Conexion a la Base de Datos
@@ -41,7 +42,7 @@ def addDatos(dni, nombre, apellido, sexo, direccion, f_nacimiento, email, nromov
     print("Entry Added")
     iConn.commit()
     iConn.close()
-    showinfo( title = "Nuevos Datos", message = "El nuevo dato fue ingresado correctamente")
+    showinfo( title = "Modulo para Insertar Registro", message = "El nuevo dato fue ingresado correctamente")
     #view()
 
 def addVacaciones(tipo, periodo, c_asistencia, c_vacaciones, detalle):
@@ -50,7 +51,7 @@ def addVacaciones(tipo, periodo, c_asistencia, c_vacaciones, detalle):
     print("Entry Added")
     iConn.commit()
     iConn.close()
-    showinfo( title = "Nuevos Datos", message = "El nuevo dato fue ingresado correctamente")
+    showinfo( title = "Modulo para Insertar Vacaciones", message = "El nuevo dato fue ingresado correctamente")
     #view()
 
 def addAsistencia(f_actual, checkin, i_detalle, checkout, o_detalle):
@@ -59,7 +60,7 @@ def addAsistencia(f_actual, checkin, i_detalle, checkout, o_detalle):
     print("Entry Added")
     iConn.commit()
     iConn.close()
-    showinfo( title = "Nuevos Datos", message = "El nuevo dato de Asistencia fue agregado")
+    showinfo( title = "Modelo para Insertar Asistencia", message = "El nuevo dato de Asistencia fue agregado")
 
 def addPapeletas(tipo, fecha, h_salida, h_retorno, motivo, lugar, autoriza):
     Database()
@@ -67,7 +68,7 @@ def addPapeletas(tipo, fecha, h_salida, h_retorno, motivo, lugar, autoriza):
     print("Entry Added")
     iConn.commit()
     iConn.close()
-    showinfo( title = "Nuevos Datos", message = "Los datos se ingresaron correctamente")
+    showinfo( title = "Modelo para Insertar Papeletas", message = "Los datos se ingresaron correctamente")
 
 # Define Search in DB
 def search(area="", detalle=""):
