@@ -20,7 +20,7 @@ class appWork(tk.Tk):
 
         self.frames = {}
 
-        for F in (Login, Dashboard, modRegistro, modVacaciones, Viewlib):
+        for F in (Login, Dashboard, modRegistro, modVacaciones, modPapeletas, Viewlib):
             frame = F(container, self)
 
             self.frames[F] = frame
@@ -95,7 +95,7 @@ class Dashboard(tk.Frame):
                             command=lambda: controller.show_frame(modVacaciones))
         btnVacaciones.pack(fill="both")
         btnPapeletas = tk.Button(self, text="Modulo de Papeletas", font=('calibri', 18), bd=10, pady=5,
-                            command=lambda: controller.show_frame(Dashboard))
+                            command=lambda: controller.show_frame(modPapeletas))
         btnPapeletas.pack(fill="both")
 
         button2 = tk.Button(self, text="Modulo de Vista de Elementos", font=('calibri', 18), bd=10, pady=5,
@@ -183,22 +183,30 @@ class modVacaciones(tk.Frame):
         # Labels
         lbTitle = tk.Label(Top, text="Worknesh: Dashboard - Modulo de Vacaciones", font=('arial black', 18))
         lbTitle.pack()
+       
         lbBuscar = tk.Label(Form, text = "Busqueda:", font=('arial', 14), bd=15)
         lbBuscar.grid(row=0, column=0, sticky="e")
         lbCodigo = tk.Label(Form, text = "Codigo:", font=('arial', 14), bd=15)
         lbCodigo.grid(row=0, column=2, sticky="e")
         lbTipo = tk.Label(Form, text = "Tipo:", font=('arial', 14), bd=15)
         lbTipo.grid(row=1, sticky="e",column=1)
-        lbPeriodo = tk.Label(Form, text = "Periodo:", font=('arial', 14), bd=15)
-        lbPeriodo.grid(row=2, sticky="e",column=1)
-        lbLAsistencia = tk.Label(Form, text = "Asistencia:", font=('arial', 14), bd=15)
-        lbLAsistencia.grid(row=1, sticky="e",column=3)
-        lbVacaciones = tk.Label(Form, text = "Vacaciones:", font=('arial', 14), bd=15)
-        lbVacaciones.grid(row=2, sticky="e",column=3)
-        lbDetalle = tk.Label(Form,text = "Detalle:", font=('arial',14), bd=15)
-        lbDetalle.grid(row=3,sticky="e",column=3)
+        lbFecha = tk.Label(Form, text = "Periodo:", font=('arial', 14), bd=15)
+        lbFecha.grid(row=2, sticky="e",column=1)
+        lbSalida = tk.Label(Form, text = "Asistencia:", font=('arial', 14), bd=15)
+        lbSalida.grid(row=1, sticky="e",column=3)
+        lbRetorno = tk.Label(Form, text = "Vacaciones:", font=('arial', 14), bd=15)
+        lbRetorno.grid(row=2, sticky="e",column=3)
+        lbMotivo = tk.Label(Form,text = "Detalle:", font=('arial',14), bd=15)
+        lbMotivo.grid(row=3,sticky="e",column=3)
+        lbLugar = tk.Label(Form,text = "Detalle:", font=('arial',14), bd=15)
+        lbLugar.grid(row=3,sticky="e",column=3)
+        lbMotivo = tk.Label(Form,text = "Detalle:", font=('arial',14), bd=15)
+        lbMotivo.grid(row=3,sticky="e",column=3)
 
-        # Entrys - Cajas de Texto
+
+
+
+        # Entrys - Cajas de Texto      
         tbBuscar = tk.Entry(Form,textvariable=tbBuscar, font=(14))
         tbBuscar.grid(row=0, column=1)
         tbCodigo = tk.Entry(Form,textvariable=tbCodigo ,font=(14))
@@ -215,7 +223,87 @@ class modVacaciones(tk.Frame):
         tbDetalle.grid(row=3, column=4)
 
 
-        btnInsert = tk.Button(self, text="Add Libraian", command=lambda: dbquery.insert(tbArea.get(), tbDetalle.get()))
+        btnInsert = tk.Button(self, text="Agregar registro", command=lambda: dbquery.insert(tbArea.get(), tbDetalle.get()))
+        btnInsert.pack()
+        btnBack = tk.Button(self, text='BACK',
+                                command=lambda: controller.show_frame(Dashboard)) 
+        btnBack.pack()
+
+class modPapeletas(tk.Frame):
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self, parent)
+
+        # Variables
+        tbBuscar = tk.StringVar()               
+        tbCodigo = tk.StringVar()
+        tbNombre = tk.StringVar()
+        tbApellido = tk.StringVar()
+        tbTipo = tk.StringVar()
+        tbFecha = tk.StringVar()
+        tbSalida = tk.StringVar()
+        tbRetorno = tk.StringVar()
+        tbMotivo = tk.StringVar()
+        tbLugar = tk.StringVar()
+        tbAutoriza = tk.StringVar()
+
+        # Frame
+        Top = tk.Frame(self, bd=2)
+        Top.pack()
+        Form = tk.Frame(self, width=800, height=400)
+        Form.pack()
+
+        # Labels
+        lbTitle = tk.Label(Top, text="Worknesh: Dashboard - Modulo de Papeletas", font=('arial black', 18))
+        lbTitle.pack()
+        lbBuscar = tk.Label(Form, text = "Busqueda:", font=('arial', 14), bd=15)
+        lbBuscar.grid(row=0, column=0, sticky="e")
+        lbCodigo = tk.Label(Form, text = "Codigo:", font=('arial', 14), bd=15)
+        lbCodigo.grid(row=0, column=2, sticky="e")
+        tbNombre = tk.Label(Form, text = "Nombre:", font=('arial', 14), bd=15)
+        tbNombre.grid(row=1, sticky="e",column=1)
+        lbApellido = tk.Label(Form, text = "Apellido:", font=('arial', 14), bd=15)
+        lbApellido.grid(row=2, sticky="e",column=1)
+        lbTipo = tk.Label(Form, text = "Tipo:", font=('arial', 14), bd=15)
+        lbTipo.grid(row=1, sticky="e",column=3)
+        lbFecha = tk.Label(Form, text = "Fecha:", font=('arial', 14), bd=15)
+        lbFecha.grid(row=2, sticky="e",column=3)
+        lbH_Salida = tk.Label(Form, text = "Hora de salida:", font=('arial', 14), bd=15)
+        lbH_Salida.grid(row=3, sticky="e",column=3)
+        lbH_Retorno = tk.Label(Form, text = "Hora de tetorno:", font=('arial', 14), bd=15)
+        lbH_Retorno.grid(row=4, sticky="e",column=3)
+        lbMotivo = tk.Label(Form, text = "Motivo:", font=('arial', 14), bd=15)
+        lbMotivo.grid(row=3, sticky="e",column=1)
+        lbLugar = tk.Label(Form, text = "Lugar:", font=('arial', 14), bd=15)
+        lbLugar.grid(row=4, sticky="e",column=1)
+        lbAutoriza = tk.Label(Form, text = "Autoriza:", font=('arial', 14), bd=15)
+        lbAutoriza.grid(row=5, sticky="e",column=3)
+
+
+        # Entrys - Cajas de Texto
+        tbBuscar = tk.Entry(Form, textvariable=tbBuscar, font=(14))
+        tbBuscar.grid(row=0, column=1)
+        tbCodigo = tk.Entry(Form,textvariable=tbCodigo, font=(14))
+        tbCodigo.grid(row=0, column=3)
+        tbNombre = tk.Entry(Form,textvariable=tbNombre, font=(14))
+        tbNombre.grid(row=1, column=2)
+        tbApellido = tk.Entry(Form,textvariable=tbApellido, font=(14))
+        tbApellido.grid(row=2, column=2)
+        tbTipo = tk.Entry(Form,textvariable=tbTipo, font=(14))
+        tbTipo.grid(row=1, column=4)
+        tbFecha = tk.Entry(Form,textvariable=tbFecha, font=(14))
+        tbFecha.grid(row=2, column=4)
+        tbSalida = tk.Entry(Form,textvariable=tbSalida, font=(14))
+        tbSalida.grid(row=3, column=4)
+        tbRetorno = tk.Entry(Form,textvariable=tbRetorno, font=(14))
+        tbRetorno.grid(row=4, column=4)
+        tbMotivo = tk.Entry(Form,textvariable=tbMotivo, font=(14))
+        tbMotivo.grid(row=3, column=2)
+        tbLugar = tk.Entry(Form,textvariable=tbLugar, font=(14))
+        tbLugar.grid(row=4, column=2)
+        tbAutoriza = tk.Entry(Form,textvariable=tbAutoriza, font=(14))
+        tbAutoriza.grid(row=5, column=4)
+
+        btnInsert = tk.Button(self, text="Agregar Registro", command=lambda: dbquery.insert(tBuscar.get(), tbCodigo.get(), tbNombre.get(), tbApellido.get(), tbLugar.get(), tbTipo.get(), tbFecha.get(), tbSalida.get(), tbRetorno.get(), tbMotivo.get(), tbLugar.get(), tbAutoriza.get()))
         btnInsert.pack()
         btnBack = tk.Button(self, text='BACK',
                                 command=lambda: controller.show_frame(Dashboard)) 
