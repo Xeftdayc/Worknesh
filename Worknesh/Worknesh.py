@@ -20,7 +20,7 @@ class appWork(tk.Tk):
 
         self.frames = {}
 
-        for F in (Login, Dashboard, modRegistro, modVacaciones, Viewlib):
+        for F in (Login, Dashboard, modTester, modRegistro, modVacaciones, Viewlib):
             frame = F(container, self)
 
             self.frames[F] = frame
@@ -56,13 +56,13 @@ class Login(tk.Frame):
         lbl_text = tk.Label(self, text="Ingrese sus credenciales", fg="red")
         lbl_text.pack(pady=10,padx=10)
 
-        button1 = tk.Button(self, text="Login", font=('new times roman', 14), width=10, bd=5, pady=2,
+        btnLogin = tk.Button(self, text="Login", font=('new times roman', 14), width=10, bd=5, pady=2,
                             command=lambda: controller.show_frame(Dashboard))
-        button1.pack()
+        btnLogin.pack()
 
-        button2 = tk.Button(self, text="Back", font=('new times roman', 14), width=10, bd=5, pady=2,
+        btnBack = tk.Button(self, text="Back", font=('new times roman', 14), width=10, bd=5, pady=2,
                             command=lambda: controller.show_frame(Dashboard))
-        button2.pack()
+        btnBack.pack()
 
 class Dashboard(tk.Frame):
     def __init__(self, parent, controller):
@@ -84,6 +84,10 @@ class Dashboard(tk.Frame):
         self.Area = tk.Entry(frame2)
         self.Area.focus()
         self.Area.grid(row = 1, column = 1)
+
+        btnTest = tk.Button(self, text="Modulo de Registro", font=('calibri', 18), bd=10, pady=5,
+                            command=lambda: controller.show_frame(modTester))
+        btnTest.pack(fill="both")
 
         btnRegistro = tk.Button(self, text="Modulo de Registro", font=('calibri', 18), bd=10, pady=5,
                             command=lambda: controller.show_frame(modRegistro))
@@ -109,6 +113,87 @@ class Dashboard(tk.Frame):
         button4 = tk.Button(self, text="Logout", font=('calibri', 14), bd=5, pady=5,
                             command=lambda: controller.show_frame(Dashboard))
         button4.pack()
+
+class modTester(tk.Frame):
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self, parent)
+        10
+        # Variables
+        tbArea = tk.StringVar()
+        tbDetalle = tk.StringVar()
+
+        # Frame
+        Top = tk.Frame(self, bd=2)
+        Top.pack()
+        Form = tk.Frame(self, width=800, height=400)
+        Form.pack()
+
+        # Creando el Contenedor del Frame
+        lframe = tk.Frame(self, bd=2)
+        lframe.pack()
+
+        # Ingreso del Area
+        tk.Label(lframe, text = 'Area: ').grid(row = 1, column = 0)
+        self.Area = tk.Entry(lframe)
+        self.Area.focus()
+        self.Area.grid(row = 1, column = 1)
+
+        # Ingreso del Detalle
+        tk.Label(lframe, text = 'Detalle: ').grid(row = 2, column = 0)
+        self.Detalle = tk.Entry(lframe)
+        self.Detalle.grid(row = 2, column = 1)
+        
+        # Button de Agregar Registro
+        #btn12 = tkk.Button(lframe, text = "Guardar Datos")
+        #btn12.pack()
+
+        # Ingreso del Detalle
+        self.btn3 = tk.Button(lframe, text="Guardar Datos")
+        self.btn3.grid(row = 3, columnspan = 2, sticky="we")
+
+        # Mensajes de Salida
+        self.message = tk.Label(lframe, text="error", fg="red")
+        self.message.grid(row = 4, column = 0, columnspan = 2, sticky = "we")
+
+        # Table
+        
+
+        
+
+        #lbBuscar = tk.Label(Form, text = "Busqueda:", font=('arial', 14), bd=15)
+        #lbBuscar.grid(row=0, column=0, sticky="e")
+
+        # Labels
+        lbTitle = tk.Label(Top, text="Worknesh: Dashboard - Modulo de Testeo", font=('arial black', 18))
+        lbTitle.pack()
+        lbBuscar = tk.Label(Form, text = "Busqueda:", font=('arial', 14), bd=15)
+        lbBuscar.grid(row=0, column=0, sticky="e")
+        lbCodigo = tk.Label(Form, text = "Codigo:", font=('arial', 14), bd=15)
+        lbCodigo.grid(row=0, column=2, sticky="e")
+        lbArea = tk.Label(Form, text = "Area:", font=('arial', 14), bd=15)
+        lbArea.grid(row=1, sticky="e",column=1)
+        lbDetalle = tk.Label(Form, text = "Detalle:", font=('arial', 14), bd=15)
+        lbDetalle.grid(row=2, sticky="e",column=1)
+
+        # Entrys - Cajas de Texto
+        tbBuscar = tk.Entry(Form, font=(14))
+        tbBuscar.grid(row=0, column=1)
+        tbCodigo = tk.Entry(Form, font=(14))
+        tbCodigo.grid(row=0, column=3)
+        tbArea = tk.Entry(Form, textvariable=tbArea, font=(14))
+        tbArea.grid(row=1, column=2)
+        tbDetalle = tk.Entry(Form, textvariable=tbDetalle, font=(14))
+        tbDetalle.grid(row=2, column=2)
+
+        list1 = tk.Listbox(Form,height=20,width=59)
+        list1.grid(row=1,column=3, rowspan=6, columnspan=2)
+
+
+        btnInsert = tk.Button(self, text="Add Libraian", command=lambda: dbquery.insert(tbArea.get(), tbDetalle.get()))
+        btnInsert.pack()
+        btnBack = tk.Button(self, text='BACK',
+                                command=lambda: controller.show_frame(Dashboard)) 
+        btnBack.pack()
 
 
 class modRegistro(tk.Frame):

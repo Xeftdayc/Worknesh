@@ -60,7 +60,7 @@ def delete(id):
 
 # Define Update in DB
 def update(id,area,detalle):
-    from backend import calculation
+    from dbquery import calculation
     Database()
     iCur.execute("UPDATE tArea SET area=?, detalle=?",(area,detalle))
     iConn.commit()
