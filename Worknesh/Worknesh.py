@@ -18,7 +18,7 @@ class appWork(tk.Tk):
 
         self.frames = {}
 
-        for F in (Login, Dashboard, modTester, modRegistro, modVacaciones, Viewlib):
+        for F in (Login, Dashboard, modTester, modRegistro, modAsistencia, modVacaciones, Viewlib):
             frame = F(container, self)
 
             self.frames[F] = frame
@@ -275,8 +275,8 @@ class modAsistencia(tk.Frame):
         lbApellido.grid(row=3, sticky="e",column=1)
         lbFactual = tk.Label(Form, text = "Factual:", font=('arial', 14), bd=15)
         lbFactual.grid(row=3, sticky="e",column=2)
-        lbChekin = tk.Label(Form, text = "Chekin:", font=('arial', 14), bd=15)
-        lbChekin.grid(row=5, column=0, sticky="e")
+        lbCheckin = tk.Label(Form, text = "Checkin:", font=('arial', 14), bd=15)
+        lbCheckin.grid(row=5, column=0, sticky="e")
         lbIndetalle = tk.Label(Form, text = "Indetalle:", font=('arial', 14), bd=15)
         lbIndetalle.grid(row=5, sticky="e",column=1)
         lbCheckout = tk.Label(Form, text = "Checkout:", font=('arial', 14), bd=15)
@@ -293,15 +293,15 @@ class modAsistencia(tk.Frame):
         tbNombre.grid(row=4, column=1)
         tbApellido = tk.Entry(Form, font=(14))
         tbApellido.grid(row=4, column=2)
-        tbFactual = tk.Entry(Form, font=(14))
+        tbFactual = tk.Entry(Form, textvariable=tbFactual, font=(14))
         tbFactual.grid(row=4, column=0)
-        tbChekin = tk.Entry(Form, font=(14))
-        tbChekin.grid(row=6, column=1)
-        tbIndetalle = tk.Entry(Form, font=(14))
+        tbCheckin = tk.Entry(Form, textvariable=tbCheckin, font=(14))
+        tbCheckin.grid(row=6, column=1)
+        tbIndetalle = tk.Entry(Form, textvariable=tbIndetalle, font=(14))
         tbIndetalle.grid(row=6, column=2)
-        tbCheckout = tk.Entry(Form, font=(14))
+        tbCheckout = tk.Entry(Form, textvariable=tbCheckout, font=(14))
         tbCheckout.grid(row=6, column=0)
-        tbOutdetalle = tk.Entry(Form, font=(14))
+        tbOutdetalle = tk.Entry(Form, textvariable=tbOutdetalle, font=(14))
         tbOutdetalle.grid(row=8, column=2)
 
 
@@ -317,8 +317,8 @@ class modAsistencia(tk.Frame):
         chViernes = tk.Checkbutton(Form, text="Viernes", variable=vViernes).grid(row=13)
 
 
-        btnInsert = tk.Button(self, text="Agregar Registro", command=lambda: dbquery.insert(tbArea.get(), tbDetalle.get()))
-        btnInsert.pack()
+        btnAdd = tk.Button(self, text="Agregar Registro", command=lambda: dbquery.addAsistencia(tbFactual.get(), tbCheckin.get(), tbIndetalle.get(), tbCheckout.get(), tbOutdetalle.get()))
+        btnAdd.pack()
         btnBack = tk.Button(self, text='BACK',
                                 command=lambda: controller.show_frame(Dashboard)) 
         btnBack.pack()

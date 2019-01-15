@@ -44,6 +44,14 @@ def addVacaciones(tipo, periodo, c_asistencia, c_vacaciones, detalle):
     showinfo( title = "Nuevos Datos", message = "El nuevo dato fue ingresado correctamente")
     #view()
 
+def addAsistencia(f_actual, checkin, i_detalle, checkout, o_detalle):
+    Database()
+    iCur.execute('INSERT INTO tAsistencia VALUES (NULL, ?, ?, ?, ?, ?);',(f_actual, checkin, i_detalle, checkout, o_detalle))
+    print("Entry Added")
+    iConn.commit()
+    iConn.close()
+    showinfo( title = "Nuevos Datos", message = "El nuevo dato de Asistencia fue agregado")
+
 # Define Search
 def search(area="", detalle=""):
     Database()
