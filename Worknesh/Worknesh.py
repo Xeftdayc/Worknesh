@@ -1,11 +1,9 @@
 from tkinter.messagebox import showinfo
 #from tkinter import *
-from tkinter import ttk 
-
 import tkinter as tk
 import sqlite3
 import dbquery
-
+from tkinter import *
 
 # Estructure Page in Page
 class appWork(tk.Tk):
@@ -20,7 +18,7 @@ class appWork(tk.Tk):
 
         self.frames = {}
 
-        for F in (Login, Dashboard, modTester, modRegistro, modVacaciones, Viewlib):
+        for F in (Login, Dashboard, modRegistro, modVacaciones, Viewlib):
             frame = F(container, self)
 
             self.frames[F] = frame
@@ -93,7 +91,7 @@ class Dashboard(tk.Frame):
                             command=lambda: controller.show_frame(modRegistro))
         btnRegistro.pack(fill="both")
         btnAsistencia = tk.Button(self, text="Modulo de Asistencia", font=('calibri', 18), bd=10, pady=5,
-                            command=lambda: controller.show_frame(Dashboard))
+                            command=lambda: controller.show_frame(modAsistencia))
         btnAsistencia.pack(fill="both")
         btnVacaciones = tk.Button(self, text="Modulo de Vacaciones", font=('calibri', 18), bd=10, pady=5,
                             command=lambda: controller.show_frame(modVacaciones))
@@ -245,6 +243,87 @@ class modRegistro(tk.Frame):
         btnBack = tk.Button(self, text='BACK',
                                 command=lambda: controller.show_frame(Dashboard)) 
         btnBack.pack()
+
+
+class modAsistencia(tk.Frame):
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self, parent)
+
+        # Variables
+        tbFactual = tk.StringVar()
+        tbCheckin = tk.StringVar()
+        tbIndetalle = tk.StringVar()
+        tbCheckout = tk.StringVar()
+        tbOutdetalle = tk.StringVar()
+
+        # Frame
+        Top = tk.Frame(self, bd=2)
+        Top.pack()
+        Form = tk.Frame(self, width=800, height=400)
+        Form.pack()
+
+        # Labels
+        lbTitle = tk.Label(Top, text="Worknesh: Dashboard - Modulo de Asistencia", font=('arial black', 18))
+        lbTitle.pack()
+        lbBuscar = tk.Label(Form, text = "Busqueda:", font=('arial', 14), bd=15)
+        lbBuscar.grid(row=0, column=0, sticky="e")
+        lbCodigo = tk.Label(Form, text = "Codigo:", font=('arial', 14), bd=15)
+        lbCodigo.grid(row=2, column=0, sticky="e")
+        lbNombre = tk.Label(Form, text = "Nombre:", font=('arial', 14), bd=15)
+        lbNombre.grid(row=2, sticky="e",column=1)
+        lbApellido = tk.Label(Form, text = "Apellido:", font=('arial', 14), bd=15)
+        lbApellido.grid(row=2, sticky="e",column=2)
+        lbFactual = tk.Label(Form, text = "Factual:", font=('arial', 14), bd=15)
+        lbFactual.grid(row=5, sticky="e",column=0)
+        lbChekin = tk.Label(Form, text = "Chekin:", font=('arial', 14), bd=15)
+        lbChekin.grid(row=5, column=1, sticky="e")
+        lbIndetalle = tk.Label(Form, text = "Indetalle:", font=('arial', 14), bd=15)
+        lbIndetalle.grid(row=5, sticky="e",column=1)
+        lbCheckout = tk.Label(Form, text = "Checkout:", font=('arial', 14), bd=15)
+        lbCheckout.grid(row=8, sticky="e",column=2)
+        lbOutdetalle = tk.Label(Form, text = "Outdetalle:", font=('arial', 14), bd=15)
+        lbOutdetalle.grid(row=8, sticky="e",column=0)
+
+        # Entrys - Cajas de Texto
+        tbBuscar = tk.Entry(Form, font=(14))
+        tbBuscar.grid(row=1, column=0)
+        tbCodigo = tk.Entry(Form, font=(14))
+        tbCodigo.grid(row=3, column=0)
+        tbNombre = tk.Entry(Form, font=(14))
+        tbNombre.grid(row=3, column=1)
+        tbApellido = tk.Entry(Form, font=(14))
+        tbApellido.grid(row=3, column=2)
+        tbFactual = tk.Entry(Form, font=(14))
+        tbFactual.grid(row=6, column=0)
+        tbChekin = tk.Entry(Form, font=(14))
+        tbChekin.grid(row=6, column=1)
+        tbIndetalle = tk.Entry(Form, font=(14))
+        tbIndetalle.grid(row=6, column=2)
+        tbCheckout = tk.Entry(Form, font=(14))
+        tbCheckout.grid(row=9, column=0)
+        tbOutdetalle = tk.Entry(Form, font=(14))
+        tbOutdetalle.grid(row=9, column=1)
+
+
+        vLunes = tk.IntVar()
+        chLunes = tk.Checkbutton(Form, text="Lunes", variable=vLunes).grid(row=12, column=0)
+        vMartes = tk.IntVar()
+        chMartes = tk.Checkbutton(Form, text="Martes", variable=vMartes).grid(row=12, column=1)
+        vMiercoles = tk.IntVar()
+        chMiercoles = tk.Checkbutton(Form, text="Miercoles", variable=vMiercoles).grid(row=12, column=2)
+        vJueves = tk.IntVar()
+        chJueves = tk.Checkbutton(Form, text="Jueves", variable=vJueves).grid(row=13, column=0)
+        vViernes = tk.IntVar()
+        chViernes = tk.Checkbutton(Form, text="Viernes", variable=vViernes).grid(row=13, column=1)
+
+
+        btnInsert = tk.Button(self, text="Agregar Registro", command=lambda: dbquery.insert(tbArea.get(), tbDetalle.get()))
+        btnInsert.pack()
+        btnBack = tk.Button(self, text='BACK',
+                                command=lambda: controller.show_frame(Dashboard)) 
+        btnBack.pack()
+
+
 
 class modVacaciones(tk.Frame):
     def __init__(self, parent, controller):
